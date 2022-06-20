@@ -45,7 +45,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/kayc529/COMP229-F2022-Midterm-301183574"
   },
   "keywords": [
     "NodeJS",
@@ -54,8 +54,5 @@
   ],
   "author": "Your Name Goes Here",
   "license": "ISC",
-  "bugs": {
-    "url": ""
-  },
   "homepage": ""
 }
