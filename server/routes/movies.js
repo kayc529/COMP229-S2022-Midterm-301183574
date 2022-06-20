@@ -91,9 +91,16 @@ router.post('/:id', (req, res, next) => {
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
+  let movieId = req.params.id;
+
+  movies.remove({ _id: movieId }, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    }
+
+    res.redirect('/movies');
+  });
 });
 
 module.exports = router;
