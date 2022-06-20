@@ -39,8 +39,6 @@ router.post('/add', (req, res, next) => {
     Genre: req.body.genre,
   };
 
-  console.log('NEW MOVIE', newMovie);
-
   movies.create(newMovie, (err, movie) => {
     if (err) {
       console.log(err);
@@ -53,16 +51,42 @@ router.post('/add', (req, res, next) => {
 
 // GET the Movies Details page in order to edit an existing Movies
 router.get('/:id', (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
+  let movieId = req.params.id;
+
+  movies.findById(movieId, (err, movieToEdit) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    }
+
+    console.log('movie to edit: ', movieToEdit);
+    res.render('movies/details', {
+      title: 'Edit Movie',
+      list: movieToEdit,
+    });
+  });
 });
 
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
+  let movieId = req.params.id;
+
+  let updatedMovie = {
+    _id: movieId,
+    Title: req.body.title,
+    Description: req.body.description,
+    Released: req.body.released,
+    Director: req.body.director,
+    Genre: req.body.genre,
+  };
+
+  movies.updateOne({ _id: movieId }, updatedMovie, (err, movie) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    }
+    res.redirect('/movies');
+  });
 });
 
 // GET - process the delete by user id
